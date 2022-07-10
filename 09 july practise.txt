@@ -1,0 +1,301 @@
+Microsoft Windows [Version 10.0.19044.1706]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\DELL>ssh -i Downloads\ashish_agarwal.pem ubuntu@15.207.87.156
+The authenticity of host '15.207.87.156 (15.207.87.156)' can't be established.
+ECDSA key fingerprint is SHA256:n0yrXp9Xp54h231ck23DIkGOSm7ri68l4TIz0FqnMHM.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '15.207.87.156' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-1031-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sat Jul  9 15:37:45 UTC 2022
+
+  System load:  0.73              Processes:             110
+  Usage of /:   48.1% of 7.58GB   Users logged in:       0
+  Memory usage: 20%               IPv4 address for eth0: 172.31.41.234
+  Swap usage:   0%
+
+
+16 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+
+Last login: Fri Jul  8 15:35:53 2022 from 110.227.176.189
+ubuntu@ip-172-31-41-234:~$ sudo -i
+root@ip-172-31-41-234:~# history
+    1  sudo apt update
+    2  java
+    3  sudo apt update
+    4  sudo apt install openjdk-8-jre-headless -y
+    5  java -version
+    6  wget https://dlcdn.apache.org/hadoop/common/hadoop-3.2.3/hadoop-3.2.3.tar.gz -P ~/Downloads
+    7  ls
+    8  cd Downloads/
+    9  ls
+   10  history
+   11  java -version
+   12  ls
+   13  cd Downloads/
+   14  exit
+   15  ls
+   16  cd Downloads/
+   17  cd ..
+   18  wget https://dlcdn.apache.org/hadoop/common/hadoop-3.2.3/hadoop-3.2.3.tar.gz -P ~/Downloads
+   19  ls
+   20  cd Downloads/
+   21  ls
+   22  sudo tar zxvf ~/Downloads/hadoop-* -C /usr/local
+   23  clear
+   24  ls
+   25  sudo tar zxvf ~/Downloads/hadoop-* -C /usr/local
+   26  rm hadoop-3.2.3.tar.gz.1
+   27  sudo tar zxvf ~/Downloads/hadoop-* -C /usr/local
+   28  cd /usr/local/
+   29  ls
+   30  sudo mv /usr/local/hadoop-* /usr/local/hadoop
+   31  ls
+   32  cd
+   33  ls
+   34  cd ..
+   35  ls
+   36  vi .bashrc
+   37  ls
+   38  ls -a
+   39  vi .bashrc
+   40  history
+root@ip-172-31-41-234:~# readlink -f $(which java)
+/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+root@ip-172-31-41-234:~# ls /usr/local/hadoop/
+LICENSE.txt  NOTICE.txt  README.txt  bin  etc  include  lib  libexec  sbin  share
+root@ip-172-31-41-234:~# ls /usr/local/hadoop/bin/
+container-executor  hadoop.cmd  hdfs.cmd  mapred.cmd    test-container-executor  yarn.cmd
+hadoop              hdfs        mapred    oom-listener  yarn
+root@ip-172-31-41-234:~# pwd
+/root
+root@ip-172-31-41-234:~# vi .bashrc
+root@ip-172-31-41-234:~# root@ip-172-31-41-234:~# cat .bashrc
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# don't put duplicate lines in the history. See bash(1) for more options
+# ... or force ignoredups and ignorespace
+HISTCONTROL=ignoredups:ignorespace
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
+    else
+        color_prompt=
+    fi
+fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+#    . /etc/bash_completion
+#fi
+#JAVA_HOME
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export PATH=$PATH:$JAVA_HOME/bin
+#HADOOP_HOME
+export HADOOP_HOME=/usr/local/hadoop
+export PATH=$PATH:$HADOOP_HOME/bin
+#HADOOP_CONF_DIR
+export HADOOP_CONF_DIF=/usr/local/hadoop/etc/hadoop
+root@ip-172-31-41-234:~# source ~/.bashrc
+root@ip-172-31-41-234:~# echo $JAVA_HOME
+/usr/lib/jvm/java-8-openjdk-amd64
+root@ip-172-31-41-234:~# echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/local/hadoop/bin
+root@ip-172-31-41-234:~# echo $HADOOP_HOME
+/usr/local/hadoop
+root@ip-172-31-41-234:~# ls /usr/local/hadoop/bin/
+container-executor  hadoop.cmd  hdfs.cmd  mapred.cmd    test-container-executor  yarn.cmd
+hadoop              hdfs        mapred    oom-listener  yarn
+root@ip-172-31-41-234:~# ls /usr/local/hadoop/
+LICENSE.txt  NOTICE.txt  README.txt  bin  etc  include  lib  libexec  sbin  share
+root@ip-172-31-41-234:~# cat /usr/local/hadoop/bin/
+cat: /usr/local/hadoop/bin/: Is a directory
+root@ip-172-31-41-234:~# cd /usr/local/hadoop/
+root@ip-172-31-41-234:/usr/local/hadoop# ls
+LICENSE.txt  NOTICE.txt  README.txt  bin  etc  include  lib  libexec  sbin  share
+root@ip-172-31-41-234:/usr/local/hadoop# cd /etc/
+root@ip-172-31-41-234:/etc# cd ..
+root@ip-172-31-41-234:/# cd /usr/local/hadoop/
+root@ip-172-31-41-234:/usr/local/hadoop# ls
+LICENSE.txt  NOTICE.txt  README.txt  bin  etc  include  lib  libexec  sbin  share
+root@ip-172-31-41-234:/usr/local/hadoop# cd /usr/local/hadoop/etc/
+root@ip-172-31-41-234:/usr/local/hadoop/etc# ls
+hadoop
+root@ip-172-31-41-234:/usr/local/hadoop/etc# cd /usr/local/hadoop/etc/hadoop/
+root@ip-172-31-41-234:/usr/local/hadoop/etc/hadoop# ls
+capacity-scheduler.xml      hadoop-user-functions.sh.example  kms-log4j.properties        ssl-client.xml.example
+configuration.xsl           hdfs-site.xml                     kms-site.xml                ssl-server.xml.example
+container-executor.cfg      httpfs-env.sh                     log4j.properties            user_ec_policies.xml.template
+core-site.xml               httpfs-log4j.properties           mapred-env.cmd              workers
+hadoop-env.cmd              httpfs-signature.secret           mapred-env.sh               yarn-env.cmd
+hadoop-env.sh               httpfs-site.xml                   mapred-queues.xml.template  yarn-env.sh
+hadoop-metrics2.properties  kms-acls.xml                      mapred-site.xml             yarn-site.xml
+hadoop-policy.xml           kms-env.sh                        shellprofile.d              yarnservice-log4j.properties
+root@ip-172-31-41-234:/usr/local/hadoop/etc/hadoop# vi core-site.xml
+root@ip-172-31-41-234:/usr/local/hadoop/etc/hadoop# root@ip-172-31-41-234:/usr/local/hadoop/etc/hadoop# vi yarn-site.xml
+root@ip-172-31-41-234:/usr/local/hadoop/etc/hadoop# root@ip-172-31-41-234:/usr/local/hadoop/etc/hadoop# vi yarn-site.xml
+root@ip-172-31-41-234:/usr/local/hadoop/etc/hadoop# root@ip-172-31-41-234:/usr/local/hadoop/etc/hadoop# vi core-site.xml
+root@ip-172-31-41-234:/usr/local/hadoop/etc/hadoop# root@ip-172-31-41-234:/usr/local/hadoop/etc/hadoop# history
+    1  sudo apt update
+    2  java
+    3  sudo apt update
+    4  sudo apt install openjdk-8-jre-headless -y
+    5  java -version
+    6  wget https://dlcdn.apache.org/hadoop/common/hadoop-3.2.3/hadoop-3.2.3.tar.gz -P ~/Downloads
+    7  ls
+    8  cd Downloads/
+    9  ls
+   10  history
+   11  java -version
+   12  ls
+   13  cd Downloads/
+   14  exit
+   15  ls
+   16  cd Downloads/
+   17  cd ..
+   18  wget https://dlcdn.apache.org/hadoop/common/hadoop-3.2.3/hadoop-3.2.3.tar.gz -P ~/Downloads
+   19  ls
+   20  cd Downloads/
+   21  ls
+   22  sudo tar zxvf ~/Downloads/hadoop-* -C /usr/local
+   23  clear
+   24  ls
+   25  sudo tar zxvf ~/Downloads/hadoop-* -C /usr/local
+   26  rm hadoop-3.2.3.tar.gz.1
+   27  sudo tar zxvf ~/Downloads/hadoop-* -C /usr/local
+   28  cd /usr/local/
+   29  ls
+   30  sudo mv /usr/local/hadoop-* /usr/local/hadoop
+   31  ls
+   32  cd
+   33  ls
+   34  cd ..
+   35  ls
+   36  vi .bashrc
+   37  ls
+   38  ls -a
+   39  vi .bashrc
+   40  history
+   41  readlink -f $(which java)
+   42  ls /usr/local/hadoop/
+   43  ls /usr/local/hadoop/bin/
+   44  pwd
+   45  vi .bashrc
+   46  cat .bashrc
+   47  source ~/.bashrc
+   48  echo $JAVA_HOME
+   49  echo $PATH
+   50  echo $HADOOP_HOME
+   51  ls /usr/local/hadoop/bin/
+   52  ls /usr/local/hadoop/
+   53  cat /usr/local/hadoop/bin/
+   54  cd /usr/local/hadoop/
+   55  ls
+   56  cd /etc/
+   57  cd ..
+   58  cd /usr/local/hadoop/
+   59  ls
+   60  cd /usr/local/hadoop/etc/
+   61  ls
+   62  cd /usr/local/hadoop/etc/hadoop/
+   63  ls
+   64  vi core-site.xml
+   65  vi yarn-site.xml
+   66  vi core-site.xml
+   67  history
+root@ip-172-31-41-234:/usr/local/hadoop/etc/hadoop# exit
+logout
+ubuntu@ip-172-31-41-234:~$ exit
+logout
+Connection to 15.207.87.156 closed.
+
+C:\Users\DELL> 
